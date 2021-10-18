@@ -40,13 +40,14 @@ Deployment
 
 👤 **Author1**
 
-- Fullname: [Michael Oladele]
+- Fullname: Michael Oladele
 - GitHub: [@micheaol](https://github.com/micheaol)
 - Twitter: [@micheaol](https://twitter.com/micheaol)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/micheaol)
 
 👤 **Author2**
 
+- Fullname: Eapen Zacharias
 - GitHub: [@eapenzacharias](https://github.com/eapenzacharias)
 - Twitter: [@eapenzac](https://twitter.com/eapenzac)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/eapenzac)
