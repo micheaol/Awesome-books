@@ -12,14 +12,6 @@ const bookAuthor = getMyElement('#author-id');
 const bookParent = getMyElement('.books');
 
 let bookArray = [
-  {
-    title: 'Red Line',
-    author: 'Eapen',
-  },
-  {
-    title: 'Yellow Line',
-    author: 'Michael',
-  },
 ];
 
 function Book(title, author) {
@@ -27,34 +19,45 @@ function Book(title, author) {
   this.author = author;
 }
 
+function saveLocalStorage() {
+  let key = `${bookTitle.value} + ${bookAuthor.value}`;
+  localStorage.setItem(key, JSON.stringify(bookArray));
+}
+
 function addBook(e) {
   e.preventDefault();
   let newBook = new Book(bookTitle.value, bookAuthor.value);
   bookArray.push(newBook);
+  saveLocalStorage();
+  location.reload();
 }
 
 addBookForm.addEventListener('submit', addBook);
 
 function showBook() {
-  bookArray.forEach((book) => {
-    let bookDiv = createMyElement("div");
-    bookDiv.className = 'book';
-    let bookTitle = createMyElement("h3");
-    bookTitle.textContent = book.title;
-    let bookAuthor = createMyElement('p');
-    bookAuthor.textContent = book.author;
-    let removeBtn = createMyElement('button');
-    removeBtn.type = 'button';
-    removeBtn.id = book.title;
-    removeBtn.textContent = 'Remove';
-    let seperator = createMyElement('hr');
-    bookDiv.appendChild(bookTitle);
-    bookDiv.appendChild(bookAuthor);
-    bookDiv.appendChild(removeBtn);
-    bookDiv.appendChild(seperator);
-    bookParent.prepend(bookDiv);
-  });
+  for (key in localStorage) {
+    const dataFromLoca = JSON.parse(localStorage.getItem(key));
+    if (dataFromLoca) {
+      dataFromLoca.forEach((book) => {
+        let bookDiv = createMyElement('div');
+        bookDiv.className = 'book';
+        let bookTitle = createMyElement('h3');
+        bookTitle.textContent = book.title;
+        let bookAuthor = createMyElement('p');
+        bookAuthor.textContent = book.author;
+        let removeBtn = createMyElement('button');
+        removeBtn.type = 'button';
+        removeBtn.id = book.title;
+        removeBtn.textContent = 'Remove';
+        let seperator = createMyElement('hr');
+        bookDiv.appendChild(bookTitle);
+        bookDiv.appendChild(bookAuthor);
+        bookDiv.appendChild(removeBtn);
+        bookDiv.appendChild(seperator);
+        bookParent.prepend(bookDiv);
+      });
+    }
+  }
 }
-
 
 showBook();
