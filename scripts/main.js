@@ -34,36 +34,34 @@ function addBook(e) {
 addBookForm.addEventListener('submit', addBook);
 
 function showBook() {
-  for (const key in localStorage) {
-    if (localStorage.hasOwnProperty.call(localStorage, key)) {
-      const dataFromLoca = JSON.parse(localStorage.getItem(key));
-      if (dataFromLoca) {
-        dataFromLoca.forEach((book) => {
-          const bookDiv = createMyElement('div');
-          bookDiv.className = 'book';
-          const bookTitle = createMyElement('h3');
-          bookTitle.textContent = book.title;
-          const bookAuthor = createMyElement('p');
-          bookAuthor.textContent = book.author;
-          const removeBtn = createMyElement('button');
-          removeBtn.type = 'button';
-          removeBtn.id = book.title;
-          removeBtn.textContent = 'Remove';
-          removeBtn.addEventListener('click', (e) => {
-            const key = `${bookTitle.textContent} + ${bookAuthor.textContent}`;
-            localStorage.removeItem(key);
-            e.target.parentNode.remove();
-          });
-          const seperator = createMyElement('hr');
-          bookDiv.appendChild(bookTitle);
-          bookDiv.appendChild(bookAuthor);
-          bookDiv.appendChild(removeBtn);
-          bookDiv.appendChild(seperator);
-          bookParent.prepend(bookDiv);
+  Object.keys(localStorage).forEach((key) => {
+    const dataFromLoca = JSON.parse(localStorage.getItem(key));
+    if (dataFromLoca) {
+      dataFromLoca.forEach((book) => {
+        const bookDiv = createMyElement('div');
+        bookDiv.className = 'book';
+        const bookTitle = createMyElement('h3');
+        bookTitle.textContent = book.title;
+        const bookAuthor = createMyElement('p');
+        bookAuthor.textContent = book.author;
+        const removeBtn = createMyElement('button');
+        removeBtn.type = 'button';
+        removeBtn.id = book.title;
+        removeBtn.textContent = 'Remove';
+        removeBtn.addEventListener('click', (e) => {
+          const key = `${bookTitle.textContent} + ${bookAuthor.textContent}`;
+          localStorage.removeItem(key);
+          e.target.parentNode.remove();
         });
-      }
+        const seperator = createMyElement('hr');
+        bookDiv.appendChild(bookTitle);
+        bookDiv.appendChild(bookAuthor);
+        bookDiv.appendChild(removeBtn);
+        bookDiv.appendChild(seperator);
+        bookParent.prepend(bookDiv);
+      });
     }
-  }
+  });
 }
 
 showBook();
