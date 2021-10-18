@@ -9,6 +9,7 @@ function getMyElement(para) {
 const addBookForm = getMyElement('form');
 const bookTitle = getMyElement('#title-id');
 const bookAuthor = getMyElement('#author-id');
+const bookParent = getMyElement('.books');
 
 let bookArray = [
   {
@@ -36,7 +37,22 @@ addBookForm.addEventListener('submit', addBook);
 
 function showBook() {
   bookArray.forEach((book) => {
-    console.log(book);
+    let bookDiv = createMyElement("div");
+    bookDiv.className = 'book';
+    let bookTitle = createMyElement("h3");
+    bookTitle.textContent = book.title;
+    let bookAuthor = createMyElement('p');
+    bookAuthor.textContent = book.author;
+    let removeBtn = createMyElement('button');
+    removeBtn.type = 'button';
+    removeBtn.id = book.title;
+    removeBtn.textContent = 'Remove';
+    let seperator = createMyElement('hr');
+    bookDiv.appendChild(bookTitle);
+    bookDiv.appendChild(bookAuthor);
+    bookDiv.appendChild(removeBtn);
+    bookDiv.appendChild(seperator);
+    bookParent.prepend(bookDiv);
   });
 }
 
