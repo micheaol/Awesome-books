@@ -40,6 +40,7 @@ Deployment
 
 👤 **Author1**
 
+- Fullname: [Michael Oladele]
 - GitHub: [@micheaol](https://github.com/micheaol)
 - Twitter: [@micheaol](https://twitter.com/micheaol)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/micheaol)
