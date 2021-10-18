@@ -49,6 +49,12 @@ function showBook() {
         removeBtn.type = 'button';
         removeBtn.id = book.title;
         removeBtn.textContent = 'Remove';
+        removeBtn.addEventListener('click', (e) => {
+          let key = `${bookTitle.textContent} + ${bookAuthor.textContent}`;
+          console.log(key);
+          localStorage.removeItem(key);
+          e.target.parentNode.remove();
+        })
         let seperator = createMyElement('hr');
         bookDiv.appendChild(bookTitle);
         bookDiv.appendChild(bookAuthor);
