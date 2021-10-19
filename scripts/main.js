@@ -11,22 +11,41 @@ const bookTitle = getMyElement('#title-id');
 const bookAuthor = getMyElement('#author-id');
 const bookParent = getMyElement('.books');
 
-const bookArray = [];
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
 
-function Book(title, author) {
-  this.title = title;
-  this.author = author;
+  removeBook() {
+    const key = `${this.title} + ${this.author}`;
+    localStorage.removeItem(key);
+  }
 }
+/* eslint max-classes-per-file: ["error", 2] */
+
+class Books {
+  constructor() {
+    this.books = [];
+  }
+
+  addBook(title, author) {
+    const book = new Book(title, author);
+    this.books.push(book);
+    return book;
+  }
+}
+
+const newBook = new Books();
 
 function saveLocalStorage() {
   const key = `${bookTitle.value} + ${bookAuthor.value}`;
-  localStorage.setItem(key, JSON.stringify(bookArray));
+  localStorage.setItem(key, JSON.stringify(newBook));
 }
 
 function addBook(e) {
   e.preventDefault();
-  const newBook = new Book(bookTitle.value, bookAuthor.value);
-  bookArray.push(newBook);
+  newBook.addBook(bookTitle.value, bookAuthor.value);
   saveLocalStorage();
   window.location.reload();
 }
@@ -36,8 +55,8 @@ addBookForm.addEventListener('submit', addBook);
 function showBook() {
   Object.keys(localStorage).forEach((key) => {
     const dataFromLoca = JSON.parse(localStorage.getItem(key));
-    if (dataFromLoca) {
-      dataFromLoca.forEach((book) => {
+    if (dataFromLoca.books) {
+      dataFromLoca.books.forEach((book) => {
         const bookDiv = createMyElement('div');
         bookDiv.className = 'book';
         const bookTitle = createMyElement('h3');
@@ -49,8 +68,8 @@ function showBook() {
         removeBtn.id = book.title;
         removeBtn.textContent = 'Remove';
         removeBtn.addEventListener('click', (e) => {
-          const key = `${bookTitle.textContent} + ${bookAuthor.textContent}`;
-          localStorage.removeItem(key);
+          const book = new Book(bookTitle.textContent, bookAuthor.textContent);
+          book.removeBook();
           e.target.parentNode.remove();
         });
         const seperator = createMyElement('hr');
