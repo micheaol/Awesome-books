@@ -13,20 +13,41 @@ const bookParent = getMyElement('.books');
 
 const bookArray = [];
 
-function Book(title, author) {
-  this.title = title;
-  this.author = author;
+// function Book(title, author) {
+//   this.title = title;
+//   this.author = author;
+// }
+
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
 }
+
+class Books {
+  constructor() {
+    this.books = [];
+  }
+  addBook(title, author) {
+    let book = new Book(title, author);
+    this.books.push(book);
+    return book;
+  }
+  
+}
+const newBook = new Books();
+console.log(newBook);
 
 function saveLocalStorage() {
   const key = `${bookTitle.value} + ${bookAuthor.value}`;
-  localStorage.setItem(key, JSON.stringify(bookArray));
+  localStorage.setItem(key, JSON.stringify(newBook));
 }
 
 function addBook(e) {
   e.preventDefault();
-  const newBook = new Book(bookTitle.value, bookAuthor.value);
-  bookArray.push(newBook);
+  newBook.addBook(bookTitle.value, bookAuthor.value);
+  //bookArray.push(newBook);
   saveLocalStorage();
   window.location.reload();
 }
@@ -36,8 +57,10 @@ addBookForm.addEventListener('submit', addBook);
 function showBook() {
   Object.keys(localStorage).forEach((key) => {
     const dataFromLoca = JSON.parse(localStorage.getItem(key));
-    if (dataFromLoca) {
-      dataFromLoca.forEach((book) => {
+    console.log(dataFromLoca.books);
+    if (dataFromLoca.books) {
+      dataFromLoca.books.forEach(book => {
+        console.log(book);
         const bookDiv = createMyElement('div');
         bookDiv.className = 'book';
         const bookTitle = createMyElement('h3');
