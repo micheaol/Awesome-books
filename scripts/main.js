@@ -59,10 +59,12 @@ function showBook() {
       dataFromLoca.books.forEach((book) => {
         const bookDiv = createMyElement('div');
         bookDiv.className = 'book';
+
         const bookTitle = createMyElement('h3');
         bookTitle.textContent = book.title;
-        const bookAuthor = createMyElement('p');
-        bookAuthor.textContent = book.author;
+
+        const bookContent = createMyElement('p');
+        bookContent.textContent = `${book.title} by ${book.author}`;
         const removeBtn = createMyElement('button');
         removeBtn.type = 'button';
         removeBtn.id = book.title;
@@ -73,8 +75,7 @@ function showBook() {
           e.target.parentNode.remove();
         });
         const seperator = createMyElement('hr');
-        bookDiv.appendChild(bookTitle);
-        bookDiv.appendChild(bookAuthor);
+        bookDiv.appendChild(bookContent);
         bookDiv.appendChild(removeBtn);
         bookDiv.appendChild(seperator);
         bookParent.prepend(bookDiv);
