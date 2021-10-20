@@ -5,7 +5,7 @@ For this repository, we've created this to manage book inventory. User can add a
 
 I used ESlint to manage the files for the front-end, using loaders for HTML, CSS, and JavaScript files, in order to fix some special thing at the moment to use the front-end in a server. Feel free to suggest more additional features for this repository, or if you want to use it, feel free to do that as well.
 
-![alt text](https://github.com/micheaol/Awesome-books/blob/books-with-object/assets/images/project-img.PNG)
+![alt text](https://github.com/micheaol/Awesome-books/blob/style-core-elements/assets/images/project-img.PNG)
 
 Additional description about the project and its features.
 
