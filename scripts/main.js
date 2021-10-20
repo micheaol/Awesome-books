@@ -43,6 +43,9 @@ function printBook(book) {
   removeBtn.addEventListener('click', (e) => {
     const bookDel = new Book(book[0], book[1]);
     bookDel.removeBook();
+    if (localStorage.length === 0) {
+      bookParent.innerHTML = '<div class="book">Library Is Empty!</div>';
+    }
     e.target.parentNode.remove();
   });
   const seperator = createMyElement('hr');
@@ -52,16 +55,10 @@ function printBook(book) {
   bookParent.prepend(bookDiv);
 }
 
-function addBook(e) {
-  e.preventDefault();
-  newBook = new Book(bookTitle.value, bookAuthor.value);
-  newBook.addBook();
-  printBook([bookTitle.value, bookAuthor.value]);
-}
-
-addBookForm.addEventListener('submit', addBook);
-
 function showBook() {
+  if (localStorage.length !== 0) {
+    bookParent.innerText = '';
+  }
   Object.keys(localStorage).forEach((key) => {
     const book = JSON.parse(localStorage.getItem(key));
     if (book) {
@@ -69,5 +66,14 @@ function showBook() {
     }
   });
 }
+
+function addBook(e) {
+  e.preventDefault();
+  newBook = new Book(bookTitle.value, bookAuthor.value);
+  newBook.addBook();
+  showBook();
+}
+
+addBookForm.addEventListener('submit', addBook);
 
 showBook();
