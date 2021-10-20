@@ -17,65 +17,55 @@ class Book {
     this.author = author;
   }
 
+  addBook() {
+    const key = `${bookTitle.value} + ${bookAuthor.value}`;
+    const book = [this.title, this.author];
+    localStorage.setItem(key, JSON.stringify(book));
+  }
+
   removeBook() {
     const key = `${this.title} + ${this.author}`;
     localStorage.removeItem(key);
   }
 }
-/* eslint max-classes-per-file: ["error", 2] */
 
-class Books {
-  constructor() {
-    this.books = [];
-  }
+let newBook = new Book();
 
-  addBook(title, author) {
-    const book = new Book(title, author);
-    this.books.push(book);
-    return book;
-  }
-}
-
-const newBook = new Books();
-
-function saveLocalStorage() {
-  const key = `${bookTitle.value} + ${bookAuthor.value}`;
-  localStorage.setItem(key, JSON.stringify(newBook));
+function printBook(book) {
+  const bookDiv = createMyElement('div');
+  bookDiv.className = 'book';
+  const bookContent = createMyElement('p');
+  bookContent.textContent = `${book[0]} by ${book[1]}`;
+  const removeBtn = createMyElement('button');
+  removeBtn.type = 'button';
+  removeBtn.id = book[0] + book[1];
+  removeBtn.textContent = 'Remove';
+  removeBtn.addEventListener('click', (e) => {
+    const bookDel = new Book(book[0], book[1]);
+    bookDel.removeBook();
+    e.target.parentNode.remove();
+  });
+  const seperator = createMyElement('hr');
+  bookDiv.appendChild(bookContent);
+  bookDiv.appendChild(removeBtn);
+  bookDiv.appendChild(seperator);
+  bookParent.prepend(bookDiv);
 }
 
 function addBook(e) {
   e.preventDefault();
-  newBook.addBook(bookTitle.value, bookAuthor.value);
-  saveLocalStorage();
-  window.location.reload();
+  newBook = new Book(bookTitle.value, bookAuthor.value);
+  newBook.addBook();
+  printBook([bookTitle.value, bookAuthor.value]);
 }
 
 addBookForm.addEventListener('submit', addBook);
 
 function showBook() {
   Object.keys(localStorage).forEach((key) => {
-    const dataFromLoca = JSON.parse(localStorage.getItem(key));
-    if (dataFromLoca.books) {
-      dataFromLoca.books.forEach((book) => {
-        const bookDiv = createMyElement('div');
-        bookDiv.className = 'book';
-        const bookContent = createMyElement('p');
-        bookContent.textContent = `${book.title} by ${book.author}`;
-        const removeBtn = createMyElement('button');
-        removeBtn.type = 'button';
-        removeBtn.id = book.title;
-        removeBtn.textContent = 'Remove';
-        removeBtn.addEventListener('click', (e) => {
-          const bookDel = new Book(book.title, book.author);
-          bookDel.removeBook();
-          e.target.parentNode.remove();
-        });
-        const seperator = createMyElement('hr');
-        bookDiv.appendChild(bookContent);
-        bookDiv.appendChild(removeBtn);
-        bookDiv.appendChild(seperator);
-        bookParent.prepend(bookDiv);
-      });
+    const book = JSON.parse(localStorage.getItem(key));
+    if (book) {
+      printBook(book);
     }
   });
 }
