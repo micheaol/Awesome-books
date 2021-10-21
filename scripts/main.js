@@ -9,11 +9,13 @@ function getMyElement(para) {
 const bookTitle = getMyElement('#title-id');
 const bookAuthor = getMyElement('#author-id');
 const bookParent = getMyElement('#books');
+const booksSection = getMyElement('#books-section');
 const addBookForm = getMyElement('#add-form');
 const contactPage = getMyElement('#contact');
 const listBtn = getMyElement('#list-btn');
 const formBtn = getMyElement('#form-btn');
 const contactBtn = getMyElement('#contact-btn');
+const timerDiv = getMyElement('.timer');
 
 let lastKey = 1000;
 
@@ -88,10 +90,9 @@ function addBook(e) {
 }
 
 function showPage(page) {
-  console.log(page);
   switch (page) {
     case 1:
-      bookParent.style.display = 'flex';
+      booksSection.style.display = 'flex';
       addBookForm.style.display = 'none';
       contactPage.style.display = 'none';
       listBtn.style.color = '#0066ff';
@@ -99,7 +100,7 @@ function showPage(page) {
       contactBtn.style.color = 'black';
       break;
     case 2:
-      bookParent.style.display = 'none';
+      booksSection.style.display = 'none';
       addBookForm.style.display = 'flex';
       contactPage.style.display = 'none';
       listBtn.style.color = 'black';
@@ -107,7 +108,7 @@ function showPage(page) {
       contactBtn.style.color = 'black';
       break;
     case 3:
-      bookParent.style.display = 'none';
+      booksSection.style.display = 'none';
       addBookForm.style.display = 'none';
       contactPage.style.display = 'block';
       listBtn.style.color = 'black';
@@ -115,7 +116,7 @@ function showPage(page) {
       contactBtn.style.color = '#0066ff';
       break;
     default:
-      bookParent.style.display = 'flex';
+      booksSection.style.display = 'flex';
       addBookForm.style.display = 'none';
       contactPage.style.display = 'none';
       break;
@@ -124,13 +125,49 @@ function showPage(page) {
 
 addBookForm.addEventListener('submit', addBook);
 
-listBtn.onclick = function() { showPage(1); };
-formBtn.onclick = function() { showPage(2); };
-contactBtn.onclick = function() { showPage(3); };
+listBtn.onclick = () => {
+  showPage(1);
+};
+formBtn.onclick = () => {
+  showPage(2);
+};
+contactBtn.onclick = () => {
+  showPage(3);
+};
 
-bookParent.style.display = 'flex';
+booksSection.style.display = 'flex';
 addBookForm.style.display = 'none';
 contactPage.style.display = 'none';
 listBtn.style.color = '#0066ff';
 
+function setTimer() {
+  const timer = new Date();
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+
+  const currentMonth = months[timer.getMonth()];
+  const day = timer.getUTCDate();
+  const year = timer.getUTCFullYear();
+  let hour = timer.getHours();
+  const curentHour = hour >= 12 ? 'PM' : 'AM';
+  // eslint-disable-next-line no-mixed-operators
+  hour = ((hour + 11) % 12) + 1;
+  const min = timer.getMinutes();
+  const sec = timer.getSeconds();
+  timerDiv.innerHTML = `${currentMonth} ${day} ${year}, ${hour}:${min}:${sec} ${curentHour}`;
+}
+
+setTimer();
 showBook();
