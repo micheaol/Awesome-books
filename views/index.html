@@ -8,19 +8,38 @@
     <title>Awesome books </title>
 </head>
 <body>
+    <nav>
+        <h4>Awesome Books</h4>
+        <ul>
+            <li id="list-btn"><a href="#books-section">List</a></li>
+            <li id="form-btn"><a href="#add-form">Add New</a></li>
+            <li id="contact-btn"><a href="#contact"> Contact</a></li>
+        </ul>
+    </nav>
     <main>
         <h1>All Awesome Books</h1>
         <div class="books">
             <div class="book">Library Is Empty!</div>
         </div>
-        <div class="addBookForm">
-     
+        <div class="addBookForm" id="add-form">
             <h2>Add a new book</h2>
             <form>
-                <input type="text" placeholder="Title" id="title-id"><br>
-                <input type="text" placeholder="Author" id="author-id"><br>
+                <input type="text" placeholder="Title" id="title-id" required><br>
+                <input type="text" placeholder="Author" id="author-id" required><br>
                 <button type="submit">Add</button>
             </form>
+        </div>
+
+        <div id="contact">
+            <h1>Contact Information</h1>
+            <div class="content">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita nihil soluta harum ab cupiditate fugit!</p>
+                <ul>
+                    <li>Our email: info@something.com </li>
+                    <li>Our phone number: 23584578412</li>
+                    <li>Our address: Awesome street, near beach</li>
+                </ul>
+            </div>
         </div>
     </main>
     <script src="../scripts/main.js"></script>
