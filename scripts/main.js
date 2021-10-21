@@ -10,28 +10,28 @@ const addBookForm = getMyElement('form');
 const bookTitle = getMyElement('#title-id');
 const bookAuthor = getMyElement('#author-id');
 const bookParent = getMyElement('.books');
+let lastKey = 1000;
 
 class Book {
-  constructor(title, author) {
+  constructor(title, author, key) {
     this.title = title;
     this.author = author;
+    this.key = key;
   }
 
   addBook() {
-    const key = `${bookTitle.value} + ${bookAuthor.value}`;
     const book = [this.title, this.author];
-    localStorage.setItem(key, JSON.stringify(book));
+    localStorage.setItem(this.key, JSON.stringify(book));
   }
 
   removeBook() {
-    const key = `${this.title} + ${this.author}`;
-    localStorage.removeItem(key);
+    localStorage.removeItem(this.key);
   }
 }
 
 let newBook = new Book();
 
-function printBook(book) {
+function printBook(book, key) {
   const bookDiv = createMyElement('div');
   bookDiv.className = 'book';
   const bookContent = createMyElement('p');
@@ -41,7 +41,7 @@ function printBook(book) {
   removeBtn.id = book[0] + book[1];
   removeBtn.textContent = 'Remove';
   removeBtn.addEventListener('click', (e) => {
-    const bookDel = new Book(book[0], book[1]);
+    const bookDel = new Book(book[0], book[1], key);
     bookDel.removeBook();
     if (localStorage.length === 0) {
       bookParent.innerHTML = '<div class="book">Library Is Empty!</div>';
@@ -58,18 +58,26 @@ function printBook(book) {
 function showBook() {
   if (localStorage.length !== 0) {
     bookParent.innerText = '';
+    const bookKeys = [];
+    Object.keys(localStorage).forEach((key) => {
+      bookKeys.push(Number(key));
+    });
+    bookKeys.sort().forEach((key) => {
+      const book = JSON.parse(localStorage.getItem(key));
+      if (book) {
+        if (lastKey <= Number(key)) lastKey = Number(key);
+        printBook(book, Number(key));
+      }
+    });
   }
-  Object.keys(localStorage).forEach((key) => {
-    const book = JSON.parse(localStorage.getItem(key));
-    if (book) {
-      printBook(book);
-    }
-  });
 }
 
 function addBook(e) {
   e.preventDefault();
-  newBook = new Book(bookTitle.value, bookAuthor.value);
+  lastKey += 1;
+  newBook = new Book(bookTitle.value, bookAuthor.value, lastKey);
+  bookTitle.value = '';
+  bookAuthor.value = '';
   newBook.addBook();
   showBook();
 }
