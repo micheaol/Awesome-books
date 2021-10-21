@@ -16,7 +16,6 @@ const listBtn = getMyElement('#list-btn');
 const formBtn = getMyElement('#form-btn');
 const contactBtn = getMyElement('#contact-btn');
 
-
 let lastKey = 1000;
 
 class Book {
