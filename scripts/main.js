@@ -15,7 +15,7 @@ const contactPage = getMyElement('#contact');
 const listBtn = getMyElement('#list-btn');
 const formBtn = getMyElement('#form-btn');
 const contactBtn = getMyElement('#contact-btn');
-const timerDiv = getMyElement('.timer');
+
 
 let lastKey = 1000;
 
@@ -140,34 +140,4 @@ addBookForm.style.display = 'none';
 contactPage.style.display = 'none';
 listBtn.style.color = '#0066ff';
 
-function setTimer() {
-  const timer = new Date();
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-
-  const currentMonth = months[timer.getMonth()];
-  const day = timer.getUTCDate();
-  const year = timer.getUTCFullYear();
-  let hour = timer.getHours();
-  const curentHour = hour >= 12 ? 'PM' : 'AM';
-  // eslint-disable-next-line no-mixed-operators
-  hour = ((hour + 11) % 12) + 1;
-  const min = timer.getMinutes();
-  const sec = timer.getSeconds();
-  timerDiv.innerHTML = `${currentMonth} ${day} ${year}, ${hour}:${min}:${sec} ${curentHour}`;
-}
-
-setTimer();
 showBook();

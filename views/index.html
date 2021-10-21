@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.0.2/build/global/luxon.min.js"></script>
     <title>Awesome books </title>
 </head>
 <body>
@@ -18,7 +19,7 @@
     </nav>
     <main>
         <div class="timer">
-           
+    
         </div>
         <div id="books-section">
             <h1>All Awesome Books</h1>
@@ -49,5 +50,11 @@
     </main>
     <footer>Copyright &copy;</footer>
     <script src="../scripts/main.js"></script>
+    <script>
+        const timerDiv = document.querySelector('.timer');
+          const DateTime = luxon.DateTime;
+        const now = DateTime.now();
+        timerDiv.innerHTML = DateTime.fromISO(now).toFormat('LLLL dd y, hh:mm:ss a');
+    </script>
 </body>
 </html>
