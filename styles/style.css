@@ -9,7 +9,7 @@ h1 {
   margin: 50px 0 20px 0;
 }
 
-.books {
+#books {
   border: 2px solid black;
   border-radius: 5px;
   max-width: 90%;
@@ -93,6 +93,10 @@ nav {
 nav ul{
   display: flex;
   list-style-type: none;
+}
+
+nav ul  {
+  
 }
 
 #nav-border {
