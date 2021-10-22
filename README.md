@@ -21,18 +21,14 @@ Additional description about the project and its features.
     -CSS
     -JS
 
-<!-- ## Live Demo
+## Live Demo
 
-[Live Demo Link](https://micheaol.github.io/Awesome-books/) -->
+[Live Demo Link](https://micheaol.github.io/Awesome-books/)
 
-To get a local copy up and running follow these simple example steps.
-
-Prerequisites
-Setup
-Install
-Usage
-Run tests
-Deployment
+Prerequisites : - You must have Node.js install on your local machine
+                - You must know the basic of Javascrit, CSS, and HTML
+                
+Setup : Clone the repository to your local machine.
 
 
 ## Authors
