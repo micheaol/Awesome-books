@@ -6,10 +6,16 @@ function getMyElement(para) {
   return document.querySelector(para);
 }
 
-const addBookForm = getMyElement('form');
 const bookTitle = getMyElement('#title-id');
 const bookAuthor = getMyElement('#author-id');
-const bookParent = getMyElement('.books');
+const bookParent = getMyElement('#books');
+const booksSection = getMyElement('#books-section');
+const addBookForm = getMyElement('#add-form');
+const contactPage = getMyElement('#contact');
+const listBtn = getMyElement('#list-btn');
+const formBtn = getMyElement('#form-btn');
+const contactBtn = getMyElement('#contact-btn');
+
 let lastKey = 1000;
 
 class Book {
@@ -82,6 +88,55 @@ function addBook(e) {
   showBook();
 }
 
+function showPage(page) {
+  switch (page) {
+    case 1:
+      booksSection.style.display = 'flex';
+      addBookForm.style.display = 'none';
+      contactPage.style.display = 'none';
+      listBtn.style.color = '#0066ff';
+      formBtn.style.color = 'black';
+      contactBtn.style.color = 'black';
+      break;
+    case 2:
+      booksSection.style.display = 'none';
+      addBookForm.style.display = 'flex';
+      contactPage.style.display = 'none';
+      listBtn.style.color = 'black';
+      formBtn.style.color = '#0066ff';
+      contactBtn.style.color = 'black';
+      break;
+    case 3:
+      booksSection.style.display = 'none';
+      addBookForm.style.display = 'none';
+      contactPage.style.display = 'block';
+      listBtn.style.color = 'black';
+      formBtn.style.color = 'black';
+      contactBtn.style.color = '#0066ff';
+      break;
+    default:
+      booksSection.style.display = 'flex';
+      addBookForm.style.display = 'none';
+      contactPage.style.display = 'none';
+      break;
+  }
+}
+
 addBookForm.addEventListener('submit', addBook);
+
+listBtn.onclick = () => {
+  showPage(1);
+};
+formBtn.onclick = () => {
+  showPage(2);
+};
+contactBtn.onclick = () => {
+  showPage(3);
+};
+
+booksSection.style.display = 'flex';
+addBookForm.style.display = 'none';
+contactPage.style.display = 'none';
+listBtn.style.color = '#0066ff';
 
 showBook();

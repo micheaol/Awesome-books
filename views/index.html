@@ -5,24 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.0.2/build/global/luxon.min.js"></script>
     <title>Awesome books </title>
 </head>
 <body>
+    <nav>
+        <h4>Awesome Books</h4>
+        <ul>
+            <li><a id="list-btn" href="#books-section">List</a></li>
+            <li><a id="form-btn" href="#add-form">Add New</a></li>
+            <li><a id="contact-btn" href="#contact"> Contact</a></li>
+        </ul>
+    </nav>
     <main>
-        <h1>All Awesome Books</h1>
-        <div class="books">
-            <div class="book">Library Is Empty!</div>
+        <div class="timer">
+    
         </div>
-        <div class="addBookForm">
-     
-            <h2>Add a new book</h2>
+        <div id="books-section">
+            <h1>All Awesome Books</h1>
+            <div id="books">
+                <div class="book">Library Is Empty!</div>
+            </div>
+        </div>
+        <div class="addBookForm" id="add-form">
+            <h1>Add a new book</h1>
             <form>
-                <input type="text" placeholder="Title" id="title-id"><br>
-                <input type="text" placeholder="Author" id="author-id"><br>
+                <input type="text" placeholder="Title" id="title-id" required><br>
+                <input type="text" placeholder="Author" id="author-id" required><br>
                 <button type="submit">Add</button>
             </form>
         </div>
+
+        <div id="contact">
+            <h1>Contact Information</h1>
+            <div class="content">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita nihil soluta harum ab cupiditate fugit!</p>
+                <ul>
+                    <li>Our email: info@something.com </li>
+                    <li>Our phone number: 23584578412</li>
+                    <li>Our address: Awesome street, near beach</li>
+                </ul>
+            </div>
+        </div>
     </main>
+    <footer>Copyright &copy;</footer>
     <script src="../scripts/main.js"></script>
+    <script>
+        const timerDiv = document.querySelector('.timer');
+          const DateTime = luxon.DateTime;
+        const now = DateTime.now();
+        timerDiv.innerHTML = DateTime.fromISO(now).toFormat('LLLL dd y, hh:mm:ss a');
+    </script>
 </body>
 </html>
