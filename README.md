@@ -28,7 +28,7 @@ Additional description about the project and its features.
 
 To get a local copy up and running follow these simple example steps.
 
-Prerequisites
+Prerequisites : You must have Node.js install on your local machine, you must know the basic of Javascrit, CSS, and HTML
 Setup
 Install
 Usage
