@@ -21,9 +21,9 @@ Additional description about the project and its features.
     -CSS
     -JS
 
-## Live Demo
+<!-- ## Live Demo
 
-[Live Demo Link](https://micheaol.github.io/Awesome-books/)
+[Live Demo Link](https://micheaol.github.io/Awesome-books/) -->
 
 To get a local copy up and running follow these simple example steps.
 
